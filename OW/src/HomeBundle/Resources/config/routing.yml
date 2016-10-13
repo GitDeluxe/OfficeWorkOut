@@ -1,0 +1,3 @@
+home_homepage:
+    path:     /{_startup}/{_prenom}/{_URL}
+    defaults: { _controller: HomeBundle:Default:index,_startup: "startup",_prenom: "Yodfhu",_URL: "http://" }

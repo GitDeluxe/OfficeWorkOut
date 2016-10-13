@@ -1,0 +1,7 @@
+moves_homepage:
+    path:     /register/{_requestURL}
+    defaults: { _controller: MovesBundle:Moves:index,_requestURL: " http://"}
+
+moves_profile:
+    path:     /profile
+    defaults: { _controller: MovesBundle:Moves:profile }
