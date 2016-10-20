@@ -1,11 +1,11 @@
 <?php
-namespace Symfony\Component\Security\Core\User;
+namespace AppBundle\Security\Core\User;
 
 use HWI\Bundle\OAuthBundle\OAuth\Response\UserResponseInterface;
-use HWI\Bundle\OAuthBundle\Security\Core\User\FOSUBUserProvider as BaseFOSUBProvider;
+use HWI\Bundle\OAuthBundle\Security\Core\User\FOSUBUserProvider as BaseClass;
 use Symfony\Component\Security\Core\User\UserInterface;
 
-class MyFOSUBUserProvider extends BaseFOSUBProvider
+class MyFOSUBUserProvider extends BaseClass
 {
     /**
      * {@inheritDoc}
@@ -17,16 +17,22 @@ class MyFOSUBUserProvider extends BaseFOSUBProvider
         $property = $this->getProperty($response);
         $username = $response->getUsername(); // get the unique user identifier
 
-        //we "disconnect" previously connected users
-        $existingUser = $this->userManager->findUserBy(array($property => $username));
-        if (null !== $existingUser) {
-            // set current user id and token to null for disconnect
-            // ...
+         //on connect - get the access token and the user ID
+        $service = $response->getResourceOwner()->getName();
 
-            $this->userManager->updateUser($existingUser);
+        //we "disconnect" previously connected users
+
+        if (null !== $previousUser = $this->userManager->findUserBy(array($property => $username))) {
+            $previousUser->$setter_id(null);
+            $previousUser->$setter_token(null);
+            $this->userManager->updateUser($previousUser);
         }
-        // we connect current user, set current user id and token
-        // ...
+
+        
+            $user->$setter_id($username);
+            $user->$setter_token($response->getAccessToken());
+     
+        
         $this->userManager->updateUser($user);
     }
 
@@ -49,6 +55,7 @@ class MyFOSUBUserProvider extends BaseFOSUBProvider
             return $user;
         }
         // else update access token of existing user
+        $user = parent::loadUserByOAuthUserResponse($response);
         $serviceName = $response->getResourceOwner()->getName();
         $setter = 'set' . ucfirst($serviceName) . 'AccessToken';
         $user->$setter($response->getAccessToken());//update access token
@@ -56,4 +63,3 @@ class MyFOSUBUserProvider extends BaseFOSUBProvider
         return $user;
     }
 }
-```

@@ -23,12 +23,6 @@ class User extends BaseUser
     protected $id;
     
 
- 
-    public function getId()
-    {
-        return $this->id;
-    }
-
 
     /**
      * @ORM\Column(name="moves_id", type="string", length=255, nullable=true)
@@ -82,7 +76,4 @@ class User extends BaseUser
     {
         return $this->movesAccessToken;
     }
-}
-```
-
 }

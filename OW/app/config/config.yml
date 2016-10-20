@@ -85,26 +85,19 @@ fos_user:
 
 
 hwi_oauth:
-    http_client:
-        timeout:       10 # Time in seconds, after library will shutdown request, by default: 5
-        verify_peer:   false # Setting allowing you to turn off SSL verification, by default: true
-        ignore_errors: false # Setting allowing you to easier debug request errors, by default: true
-        max_redirects: 1 # Number of HTTP redirection request after which library will shutdown request,
-                         # by default: 5
-        proxy: "wimycow.com:8000" # String with proxy configuration for cURL connections, ignored by default.
-     # list of names of the firewalls in which this bundle is active, this setting MUST be set
+    
     connect:
-        account_connector: moves.user_provider
-    firewall_names:
-        - 'hwi_oauth_firewall_name' # name of security firewall configured to work with HWIOAuthBundle
+        account_connector: moves_user_provider
+    firewall_names: [secured_area]
+         # name of security firewall configured to work with HWIOAuthBundle
     fosub:
         username_iterations: 30
         properties:
             moves:    Moves_id
-    firewall_names: [secured_area]
+    #firewall_names: [secured_area]
 # configuration of oauth resource owners to use
     resource_owners:
-        fosub_bridge_provider:
+        moves:
             type:                oauth2
             client_id:           jUetU3LgR7d5KxnBeWUvL8ZYx70suSsJ
             client_secret:       65Wgq1qa8ABZn960Fr37gJVOBSPms5OIhD0115dTdNlFZ6f2Jto75KYFP71jK984
