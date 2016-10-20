@@ -101,12 +101,10 @@ hwi_oauth:
             type:                oauth2
             client_id:           jUetU3LgR7d5KxnBeWUvL8ZYx70suSsJ
             client_secret:       65Wgq1qa8ABZn960Fr37gJVOBSPms5OIhD0115dTdNlFZ6f2Jto75KYFP71jK984
-            request_token_url:   https://api.moves-app.com/oauth/v1/access_token?grant_type=authorization_code&code=<code>&client_id=jUetU3LgR7d5KxnBeWUvL8ZYx70suSsJ&client_secret=65Wgq1qa8ABZn960Fr37gJVOBSPms5OIhD0115dTdNlFZ6f2Jto75KYFP71jK984&redirect_uri=http://officeworkout/home
-
-            access_token_url:    https://api.moves-app.com/oauth/v1/access_token?grant_type=refresh_token&refresh_token=<refresh_token>&client_id=jUetU3LgR7d5KxnBeWUvL8ZYx70suSsJ&client_secret=65Wgq1qa8ABZn960Fr37gJVOBSPms5OIhD0115dTdNlFZ6f2Jto75KYFP71jK984
-
-            authorization_url:   https://api.moves-app.com/oauth/v1/authorize?response_type=code&client_id=jUetU3LgR7d5KxnBeWUvL8ZYx70suSsJ&scope=activity+location&redirect_uri=http://officeworkout/home
-            infos_url:           https://api.moves-app.com/api/1.1/<cible>?access_token=<access_token>
+            use_bearer_authorization: https://api.moves-app.com/api/1.1
+            access_token_url:    https://api.moves-app.com/oauth/v1/access_token?
+            authorization_url:   https://api.moves-app.com/oauth/v1/authorize?
+            infos_url:           https://api.moves-app.com/api/1.1/user
             scope:               "activity location"
             user_response_class: HWI\Bundle\OAuthBundle\OAuth\Response\PathUserResponse
             paths:
